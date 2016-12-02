@@ -1,0 +1,17 @@
+{
+  "name": "Data",
+  "version": "0.0.1",
+  "description": "A sample Node.js app using Express 4",
+  "engines": {
+    "node": "5.9.1"
+  },
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "~4.13.4",
+    "mongoose": "3.8.40"
+  }
+}

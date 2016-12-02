@@ -1,0 +1,27 @@
+<md-toolbar md-scroll-shrink>
+  <div class="md-toolbar-tools">
+    <h5>Patients List</h5>
+  </div>
+</md-toolbar>
+<div layout="column" layout-align="start center">
+  <md-card style="width : 800px;padding:10px" flex="nogrow">
+    <input class = "put" type="text" ng-model="test" placeholder="Search Patients">
+  </md-card>
+  <md-card style="width : 800px" flex="nogrow">
+    <md-card-content>
+      <md-list>
+        <md-list-item class="md-3-line md-long-text" ng-repeat = "patient in patients | filter : {full : test}" ng-click="null">
+          <img src="http://i.forbesimg.com/media/lists/people/usher_416x416.jpg" class="md-avatar" />
+          <div class="md-list-item-text" ng-cloak>
+            <h3>{{patient.FirstName}} {{patient.LastName}}, {{patient.Gender}}</h3>
+            <p><b>Date of birth:</b> {{patient.DOB | date : "dd/MM/yyyy"}}, <b>Age:</b> {{patient.Age}}, <b>Phone:</b> {{patient.Phone}}</p>
+            <p style="overflow-wrap : break-word"><b>Details:</b></br> {{patient.Details}}</p>
+          </div>
+        </md-list-item>
+      </md-list>
+    </md-card-content>
+  </md-card>
+</div>
+<md-button class="md-fab md-whiteframe-15dp fab-absolute" aria-label="Add Patient" ng-click="new()">
+  <md-icon md-font-set="material-icons">add</md-icon>
+</md-button>

@@ -1,0 +1,69 @@
+<md-toolbar md-scroll-shrink>
+  <div class="md-toolbar-tools">
+    <h5>Patient Form</h5>
+  </div>
+</md-toolbar>
+<div layout layout-align="center">
+  <md-card style="width : 800px" flex="nogrow">
+    <form name="patientform" ng-submit = "submit()">
+      <md-card-content>
+        <div layout-gt-xs = "row" layout-xs="column">
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>First Name</label>
+            <input type="text" required md-no-asterisk name="fname" ng-model="patient.FName">
+            <div ng-messages="patientform.fname.$error">
+              <div ng-message="required">Please Enter First Name</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Last Name</label>
+            <input type="text" required md-no-asterisk name="lname" ng-model="patient.LName">
+            <div ng-messages="patientform.lname.$error">
+              <div ng-message="required">Please Enter Last Name</div>
+            </div>
+          </md-input-container>
+        </div>
+        <md-input-container class="md-block">
+          <label>Phone Number </label>
+          <input type = "number" required md-no-asterisk name="phone" min = "1000000000" max = "9999999999" ng-model= "patient.Phone">
+          <div ng-messages="patientform.phone.$error">
+            <div ng-message="required">Please Enter Phone Number</div>
+            <div ng-message="min,max">Please Enter 10 Digit Phone Number</div>
+          </div>
+        </md-input-container>
+        <div layout-gt-xs="row" layout-xs="column">
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Age</label>
+            <input type="number" min="0" max="100" required md-no-asterisk name="age" ng-model="patient.Age">
+            <div ng-messages="patientform.age.$error">
+              <div ng-message="required">Please Enter Age</div>
+              <div ng-message="min,max">Age should be between 0 to 100</div>
+            </div>
+          </md-input-container>
+          <md-input-container flex-gt-xs>
+            <label>Gender</label>
+            <md-select name="gender" required md-no-asterisk ng-model="patient.Gender">
+              <md-option ng-repeat="item in gender track by $index" ng-value="$index" ng-cloak>{{item}}</md-option>
+            </md-select>
+            <div ng-messages="patientform.gender.$error">
+              <div ng-message="required">Please Select Gender</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Date of Birth</label>
+            <md-datepicker ng-model="patient.db" md-open-on-focus></md-datepicker>
+          </md-input-container>
+        </div>
+        <md-input-container class="md-block">
+          <label>Description</label>
+          <textarea height="4" ng-model="patient.Details" name = "details"></textarea>
+        </md-input-container>
+      </md-card-content>
+      <md-card-actions>
+        <div layout layout-align="center" layout-padding>
+          <md-button type="submit">Submit</md-button>
+        </div>
+      </md-card-actions>
+    </form>
+  </md-card>
+</div>
