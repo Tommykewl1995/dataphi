@@ -41,6 +41,7 @@
       $scope.patient.DOB = $scope.patient.db.getTime();
       var successCallback = function(v){
         if(v.data.Error){
+          v.data.Error+="  For example, for Age " + $scope.patient.Age + ", Date of Birth should be dd/mm/" + (2016 - $scope.patient.Age);
           showerror($mdDialog, v.data.Error, ev);
         }else{
           $state.go('patientlist');

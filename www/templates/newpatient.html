@@ -13,14 +13,14 @@
             <label>First Name</label>
             <input type="text" required md-no-asterisk name="fname" ng-model="patient.FName">
             <div ng-messages="patientform.fname.$error">
-              <div ng-message="required">Please Enter First Name</div>
+              <div ng-message="required">Please Enter Your First Name</div>
             </div>
           </md-input-container>
           <md-input-container class="md-block" flex-gt-xs>
             <label>Last Name</label>
             <input type="text" required md-no-asterisk name="lname" ng-model="patient.LName">
             <div ng-messages="patientform.lname.$error">
-              <div ng-message="required">Please Enter Last Name</div>
+              <div ng-message="required">Please Enter Your Last Name</div>
             </div>
           </md-input-container>
         </div>
@@ -28,8 +28,8 @@
           <label>Phone Number </label>
           <input type = "number" required md-no-asterisk name="phone" min = "1000000000" max = "9999999999" ng-model= "patient.Phone">
           <div ng-messages="patientform.phone.$error">
-            <div ng-message="required">Please Enter Phone Number</div>
-            <div ng-message="min,max">Please Enter 10 Digit Phone Number</div>
+            <div ng-message="required">Please Enter Your Phone Number</div>
+            <div ng-message="min,max">Please Enter valid 10 Digit Phone Number</div>
           </div>
         </md-input-container>
         <div layout-gt-xs="row" layout-xs="column">
@@ -37,7 +37,7 @@
             <label>Age</label>
             <input type="number" min="0" max="100" required md-no-asterisk name="age" ng-model="patient.Age">
             <div ng-messages="patientform.age.$error">
-              <div ng-message="required">Please Enter Age</div>
+              <div ng-message="required">Please Your Enter Age</div>
               <div ng-message="min,max">Age should be between 0 to 100</div>
             </div>
           </md-input-container>

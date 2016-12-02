@@ -32,7 +32,7 @@ var patientSchema = new Schema({
           return false;
         }
       },
-      msg : 'Age and Date of Birth not in sync'
+      msg : 'Age and Date of Birth not in sync.'
     }
   },
   Phone : {type : String,
