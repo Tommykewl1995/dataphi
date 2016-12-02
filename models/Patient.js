@@ -1,5 +1,17 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+
+function getAge(millis) {
+    var today = new Date();
+    var birthDate = new Date(millis);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
+
 var patientSchema = new Schema({
   FirstName : {type : String,
     required : [true,"First Name is required"]
@@ -14,10 +26,13 @@ var patientSchema = new Schema({
   DOB : {type : Number,
     validate : {
       validator : function(v){
-        var now = new Date();
-        var data = new Date(Date.parse(v));
-        return true;
-      }
+        if(this.Age == getAge(v)){
+          return true;
+        }else{
+          return false;
+        }
+      },
+      msg : 'Age and Date of Birth not in sync'
     }
   },
   Phone : {type : String,

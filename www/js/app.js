@@ -21,49 +21,60 @@
       });
   }
 
-  function NewPatient($scope, $state, $http){
+  function showerror(mdDialog, text, ev){
+    mdDialog.show(
+      mdDialog.alert()
+        .parent(angular.element(document.body))
+        .clickOutsideToClose(true)
+        .title('Error!')
+        .textContent(text)
+        .ariaLabel('Error dialog')
+        .ok('OK')
+        .targetEvent(ev)
+    );
+  };
+
+  function NewPatient($scope, $state, $http, $mdDialog){
     $scope.gender = ["Female", "Male", "Other"];
-    $scope.submit = function(){
+    $scope.submit = function(ev){
       var data = $scope.patient;
       $scope.patient.DOB = $scope.patient.db.getTime();
       var successCallback = function(v){
-        console.log(v);
-        if(v.data.Status.ResponseCode == 200){
-          $state.go('patientlist');
+        if(v.data.Error){
+          showerror($mdDialog, v.data.Error, ev);
         }else{
-          alert(v.Error);
+          $state.go('patientlist');
         }
       }
       var errorCallback = function(err){
         if(err.status == -1){
-          alert("Please Check Your Internet Connection");
+          showerror($mdDialog, "Please Check Your Internet Connection", ev);
         }else{
-          alert("Something went wrong!!");
+          showerror($mdDialog, "Something went wrong!!", ev);
         }
       }
       $http.post('/patients', data).then(successCallback, errorCallback);
     }
   }
 
-  function PatientList($scope, $state, $http, $mdPanel){
+  function PatientList($scope, $state, $http, $mdDialog){
     var gend =["Female", "Male", "Other"];
     $http.get('/patients').then(function(data){
-      console.log(data);
-      if(data.data.Status.ResponseCode == 200){
+      if(data.data.Error == 200){
+        showerror($mdDialog, data.data.Error, ev);
+      }else{
         $scope.patients = data.data.Data;
         for(let i in $scope.patients){
           $scope.patients[i].full = $scope.patients[i].FirstName + $scope.patients[i].LastName;
           $scope.patients[i].DOB = new Date($scope.patients[i].DOB);
           $scope.patients[i].Gender = gend[$scope.patients[i].Gender];
         }
-      }else{
-        alert(data.Error);
       }
     },function(err){
       if(err.status == -1){
-        alert("Please Check Your Internet Connection");
+        showerror($mdDialog, "Please Check Your Internet Connection", ev);
       }else{
-        alert("Something went wrong!!");
+        showerror($mdDialog, "Something went wrong!!", ev);
       }
     });
     $scope.new = function(){
@@ -72,6 +83,6 @@
   }
   angular.module('DataphiApp', ['ui.router', 'ngMaterial', 'ngAnimate', 'ngAria', 'ngMessages', 'angular-loading-bar'])
     .config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', 'cfpLoadingBarProvider', '$httpProvider', theme])
-    .controller('NewPatient', ['$scope', '$state', '$http', NewPatient])
-    .controller('PatientList', ['$scope','$state','$http', '$mdPanel', PatientList]);
+    .controller('NewPatient', ['$scope', '$state', '$http','$mdDialog', NewPatient])
+    .controller('PatientList', ['$scope','$state','$http', '$mdDialog', PatientList]);
 })(angular)

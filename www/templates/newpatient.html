@@ -1,9 +1,10 @@
-<md-toolbar md-scroll-shrink>
+<md-toolbar style="height:56px">
   <div class="md-toolbar-tools">
     <h5>Patient Form</h5>
   </div>
 </md-toolbar>
-<div layout layout-align="center">
+<div class="sub"></div>
+<div layout layout-align="center" class="move-up">
   <md-card style="width : 800px" flex="nogrow">
     <form name="patientform" ng-submit = "submit()">
       <md-card-content>
@@ -61,7 +62,7 @@
       </md-card-content>
       <md-card-actions>
         <div layout layout-align="center" layout-padding>
-          <md-button type="submit">Submit</md-button>
+          <md-button class="md-raised md-primary" type="submit">Submit</md-button>
         </div>
       </md-card-actions>
     </form>

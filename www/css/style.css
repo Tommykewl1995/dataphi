@@ -47,3 +47,17 @@
 *::-webkit-scrollbar-thumb:active{
   background-color: rgba(0,0,0,0.40);
 }
+
+.sub{
+  position: absolute;
+  top:56px;
+  height: 112px;
+  width: 100%;
+  background-color: rgb(63,81,181);
+}
+
+.move-up {
+  position: relative;
+  top: 0px;
+  z-index: 2;
+}

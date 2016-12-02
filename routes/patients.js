@@ -38,8 +38,9 @@ router.post('/',function(req,res){
     });
     patient1.save(function (err) {
       if(err){
-        obj.Error = err;
-        res.json(err);
+        let temp = Object.keys(err.errors)[0];
+        obj.Error = err.errors[temp].message
+        res.json(obj);
       }else{
         obj.Data = "Success";
         res.json(obj);
